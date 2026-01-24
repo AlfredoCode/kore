@@ -7,7 +7,7 @@ class Employee(Base):
     EmployeeId = Column(Integer, primary_key=True)
     FirstName = Column(String(50), nullable=False)
     SecondName = Column(String(20), nullable=False)
-    EmployeeRoleType = Column(Integer, ForeignKey('EmployeeRoleType.EmployeeRoleTypeId'), nullable=False)
+    EmployeeRoleTypeId = Column(Integer, ForeignKey('EmployeeRoleType.EmployeeRoleTypeId'), nullable=False)
     Email = Column(String(40), nullable=False, unique=True)
     PassHash = Column(String(95), nullable=False)
     CreatedDate = Column(DateTime, nullable=False)
