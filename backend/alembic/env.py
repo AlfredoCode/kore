@@ -6,7 +6,9 @@ from sqlalchemy import pool
 
 from alembic import context
 from src.project.models import Project
-from src.employee.models import Employee
+from src.priority.models import Priority
+from src.employee.models import Employee, EmployeeAllowedProject, EmployeeRoleType
+from src.issue.models import Issue, IssueComment, IssueStatusHistory, IssueStatusType, IssueType
 from src.database import Base
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
