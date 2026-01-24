@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import pool
 
 from alembic import context
+from src.project.models import Project
 from src.employee.models import Employee
 from src.database import Base
 # this is the Alembic Config object, which provides
