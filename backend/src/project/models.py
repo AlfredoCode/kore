@@ -8,6 +8,7 @@ class Project(Base):
     Title = Column(String(40), nullable=False)
     Description = Column(String(255), nullable=True)
     CreatedDate = Column(DateTime, nullable=False)
+    CreatedByEmployee = Column(Integer, ForeignKey('Employee.EmployeeId'), nullable=True)
     Active = Column(Boolean, nullable=False, default=0)
 
 
