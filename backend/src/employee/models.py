@@ -31,4 +31,12 @@ class EmployeeAllowedProject(Base):
     AllowedAccessDate = Column(DateTime, nullable=False)
     RemovedAccessDate = Column(DateTime, nullable=True)
 
+class EmployeeIssue(Base):
+    __tablename__ = "EmployeeIssue"
     
+    EmployeeIssueId = Column(Integer, primary_key=True)
+    EmployeeId = Column(Integer, ForeignKey("Employee.EmployeeId"), nullable=False)
+    IssueId = Column(Integer, ForeignKey("Issue.IssueId"), nullable=False)
+    AssignedDate = Column(DateTime, nullable=False)
+    UnassignedDate = Column(DateTime, nullable=True)
+  
