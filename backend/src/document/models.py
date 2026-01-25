@@ -7,7 +7,7 @@ class Document(Base):
     DocumentId = Column(Integer, primary_key=True)
     FileName = Column(String, nullable=False)
     FilePath = Column(String, nullable=False)
-    Extension = Column(String(10), nullable=False)
+    ExtensionId = Column(Integer, ForeignKey("Extension.ExtensionId"), nullable=False)
     UploadedDate = Column(DateTime, nullable=False)
     UploadedByEmployeeId = Column(Integer, ForeignKey("Employee.EmployeeId"), nullable=False)
     IssueId = Column(Integer, ForeignKey("Issue.IssueId"), nullable=False)
