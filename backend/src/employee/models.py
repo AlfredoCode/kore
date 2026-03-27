@@ -9,7 +9,7 @@ class Employee(Base):
     SecondName = Column(String(20), nullable=False)
     EmployeeRoleTypeId = Column(Integer, ForeignKey('EmployeeRoleType.EmployeeRoleTypeId'), nullable=False)
     Email = Column(String(40), nullable=False, unique=True)
-    PassHash = Column(String(95), nullable=False)
+    PassHash = Column(String(255), nullable=False)
     CreatedDate = Column(DateTime, nullable=False)
     ModifiedDate = Column(DateTime, nullable=True)
     EmployeeSupervisorId = Column(Integer, ForeignKey('Employee.EmployeeId'), nullable=True)
@@ -19,7 +19,8 @@ class EmployeeRoleType(Base):
     __tablename__ = "EmployeeRoleType"
     
     EmployeeRoleTypeId = Column(Integer, primary_key=True)
-    Description = Column(String(50), nullable=False, unique=True)
+    Title = Column(String(50), nullable=False, unique=True)
+    Description = Column(String(100), nullable=False, unique=True)
     Active = Column(Boolean, nullable=False, default=0)
 
 class EmployeeAllowedProject(Base):
