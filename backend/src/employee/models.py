@@ -19,7 +19,8 @@ class EmployeeRoleType(Base):
     __tablename__ = "EmployeeRoleType"
     
     EmployeeRoleTypeId = Column(Integer, primary_key=True)
-    Description = Column(String(50), nullable=False, unique=True)
+    Title = Column(String(50), nullable=False, unique=True)
+    Description = Column(String(100), nullable=False, unique=True)
     Active = Column(Boolean, nullable=False, default=0)
 
 class EmployeeAllowedProject(Base):

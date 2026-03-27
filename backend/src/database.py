@@ -1,9 +1,11 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.exc import OperationalError, ProgrammingError
 from typing import Generator
 from sqlalchemy.orm import declarative_base
 from dotenv import load_dotenv
+from src.exceptions import DatabaseException
 
 load_dotenv()
 DB_USER = os.getenv("DB_USER")
@@ -23,5 +25,9 @@ def get_db() -> Generator[Session, None, None]:
     db = SessionLocal()
     try:
         yield db
+    except OperationalError as e:
+        raise DatabaseException("Could not connect to the Postgres database") from e
+    except ProgrammingError as e:
+        raise DatabaseException("Could not find relation between database tables.") from e
     finally:
         db.close()

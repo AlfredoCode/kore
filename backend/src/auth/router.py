@@ -1,11 +1,12 @@
-import src.exception_handler as eh
+from src.exceptions import EmailExistsException
 from fastapi import APIRouter, Depends, HTTPException, status
 from datetime import datetime
 from sqlalchemy.orm import Session
-from src.database import get_db  # your DB session dependency
+from src.database import get_db
 from src.employee.models import Employee
 from src.auth import utils
 from src.auth.schemas import EmployeeRegister, EmployeeLogin, TokenResponse, RefreshTokenRequest
+from src.schemas import GenericResponse
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 @router.post("/register", status_code=201)
@@ -19,7 +20,7 @@ def register(user: EmployeeRegister, db: Session = Depends(get_db)):
 
     existing_user = utils.get_user_by_email(db, user.email)
     if existing_user:
-        raise eh.EmailExistsException()
+        raise EmailExistsException()
 
     hashed_password = utils.get_password_hash(user.password)
 
@@ -30,12 +31,14 @@ def register(user: EmployeeRegister, db: Session = Depends(get_db)):
         SecondName=user.second_name,
         EmployeeRoleTypeId=user.employee_role_type_id,
         SystemAccess=True,
-        CreatedDate=datetime.utcnow(),
+        CreatedDate=datetime.now(),
     )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {"msg": "User registered successfully"}
+    return GenericResponse(
+        message="User created successfully."
+    )
 
 @router.post("/login", response_model=TokenResponse)
 def login(user: EmployeeLogin, db: Session = Depends(get_db)):
