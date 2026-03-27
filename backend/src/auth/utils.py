@@ -12,8 +12,8 @@ ph = PasswordHasher(time_cost=2, memory_cost=102400, parallelism=8, hash_len=32,
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 REFRESH_SECRET_KEY = os.getenv("JWT_REFRESH_SECRET_KEY")
 ALGORITHM = os.getenv("JWT_ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = 15
-REFRESH_TOKEN_EXPIRE_DAYS = 7
+ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES")
+REFRESH_TOKEN_EXPIRE_DAYS = os.getenv("JWT_REFRESH_TOKEN_EXPIRE_DAYS")
 
 def get_user_by_email(db: Session, email: str):
     return db.query(Employee).filter(Employee.Email == email).first()

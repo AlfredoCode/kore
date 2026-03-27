@@ -51,7 +51,7 @@ def login(user: EmployeeLogin, db: Session = Depends(get_db)):
 
     return TokenResponse(access_token=access_token, refresh_token=refresh_token)
 
-@router.post("/refresh-token", response_model=TokenResponse)
+@router.post("/refresh", response_model=TokenResponse)
 def refresh_token(data: RefreshTokenRequest, db: Session = Depends(get_db)):
     payload = utils.verify_token(data.refresh_token, utils.REFRESH_SECRET_KEY)
     if not payload or payload.get("type") != "refresh":
