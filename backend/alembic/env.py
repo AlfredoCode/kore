@@ -5,7 +5,6 @@ from logging.config import fileConfig
 import os
 
 from src.database import Base
-# import your models to register metadata
 from src.project.models import Project
 from src.priority.models import Priority
 from src.employee.models import Employee, EmployeeRoleType, EmployeeAllowedProject
