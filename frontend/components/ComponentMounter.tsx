@@ -13,7 +13,7 @@ const ComponentMounter = ({
   height,
   component,
 }: ComponentMounterProps) => {
-  const className = `bg-slate-400 rounded-xl flex items-center justify-center relative flex-col overflow-hidden
+  const className = `bg-slate-400 rounded-xl flex items-center justify-center relative flex-col overflow-hidden shadow-[0_0_5px_1px_black]
     ${typeof width === "string" ? `w-${width}` : "w-auto"}
     ${typeof height === "string" ? `h-${height}` : "h-auto"}`;
 
