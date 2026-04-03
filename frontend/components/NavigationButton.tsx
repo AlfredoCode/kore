@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface BaseButtonProps {
   title?: string;
   icon?: React.ReactNode;
   destination?: string;
-  styles?: string; // <-- renamed prop
+  styles?: string;
 }
 interface ButtonWithSubMenuProps extends BaseButtonProps {
   subMenu: NavigationButtonProps[];
@@ -20,7 +21,7 @@ interface ButtonWithoutSubMenuProps extends BaseButtonProps {
 type NavigationButtonProps = ButtonWithSubMenuProps | ButtonWithoutSubMenuProps;
 
 const NavigationButton = (props: NavigationButtonProps) => {
-  const { title, icon, styles = "" } = props; // default empty string
+  const { title, icon, styles = "" } = props;
   const subMenu = props.subMenu;
 
   const subMenuRef = useRef<HTMLDivElement>(null);
@@ -47,8 +48,18 @@ const NavigationButton = (props: NavigationButtonProps) => {
           {icon && <span>{icon}</span>}
           {title}
         </div>
-        {hasSubMenu && <span>{isOpen ? "▾" : "▸"}</span>}
+
+        {hasSubMenu && (
+          <span>
+            {isOpen ? (
+              <ChevronDown className="w-4 h-4" />
+            ) : (
+              <ChevronRight className="w-4 h-4" />
+            )}
+          </span>
+        )}
       </div>
+
       {hasSubMenu && (
         <div
           ref={subMenuRef}
