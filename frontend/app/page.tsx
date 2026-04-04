@@ -2,7 +2,7 @@ import ComponentMounter from "@/components/ComponentMounter";
 
 const Home = () => {
   return (
-    <div className="md:h-full xl:h-screen bg-slate-800 flex-1 w-full flex flex-row p-3 gap-3">
+    <div className="md:h-full xl:h-screen bg-slate-800 flex-1 w-full flex flex-row p-3 gap-3 xl:min-h-200 min-h-100">
       <section title="Helpdesk">
         <ComponentMounter title={"Latest tickets"} width={400} height="full" />
       </section>
