@@ -13,7 +13,7 @@ import NavigationButton from "./NavigationButton";
 
 const Navigation = () => {
   return (
-    <div className="bg-neutral-950 order-2 xl:order-0 self-end md:w-full pt-3 xl:h-screen xl:w-50 flex xl:flex-col xl:min-h-200">
+    <div className="bg-neutral-950 order-0 pt-3 w-50 flex flex-col h-dvh">
       {/* Dashboard */}
       <NavigationButton title="Dashboard" icon={<Home className="w-4" />} />
 

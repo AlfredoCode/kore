@@ -1,28 +1,21 @@
 import React from "react";
 
 interface ComponentMounterProps {
-  width?: number | string | null;
-  height?: number | string | null;
   title?: string | null;
   component?: React.ReactNode | null;
+  className?: string; // 👈 add this
 }
 
 const ComponentMounter = ({
   title,
-  width,
-  height,
   component,
+  className = "",
 }: ComponentMounterProps) => {
-  const className = `bg-slate-400 rounded-xl flex items-center justify-center relative flex-col overflow-hidden shadow-[0_0_5px_1px_black]
-    ${typeof width === "string" ? `w-${width}` : "w-auto"}
-    ${typeof height === "string" ? `h-${height}` : "h-auto"}`;
-
-  const style: React.CSSProperties = {};
-  if (typeof width === "number") style.width = `${width}px`;
-  if (typeof height === "number") style.height = `${height}px`;
+  const baseClasses =
+    "bg-slate-400 rounded-xl flex items-center justify-center relative flex-col overflow-hidden shadow-[0_0_5px_1px_black]";
 
   return (
-    <div className={className} style={style}>
+    <div className={`${baseClasses} ${className}`}>
       {component ? (
         <>{component}</>
       ) : (
