@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface BaseButtonProps {
@@ -25,23 +25,23 @@ const NavigationButton = (props: NavigationButtonProps) => {
   const subMenu = props.subMenu;
 
   const subMenuRef = useRef<HTMLDivElement>(null);
-  const [maxHeight, setMaxHeight] = useState("0px");
+  const [maxHeight, setMaxHeight] = useState(0);
 
-  const hasSubMenu = subMenu?.length ?? 0 > 0;
-  const initialOpen =
-    hasSubMenu && props.subMenuOpened ? props.subMenuOpened : false;
-  const [isOpen, setIsOpen] = useState(initialOpen);
+  const hasSubMenu = (subMenu?.length ?? 0) > 0;
+  const [isOpen, setIsOpen] = useState(true);
 
-  useEffect(() => {
+  // Use useLayoutEffect to measure height after DOM paints
+  useLayoutEffect(() => {
     if (subMenuRef.current) {
-      setMaxHeight(isOpen ? `${subMenuRef.current.scrollHeight}px` : "0px");
+      setMaxHeight(isOpen ? subMenuRef.current.scrollHeight : 0);
     }
   }, [isOpen]);
 
   return (
     <>
-      <div
-        className={`text-xs p-2 text-slate-50 select-none hover:cursor-pointer hover:bg-neutral-900 transition-all duration-30 ease-linear flex justify-between items-center ${styles}`}
+      <button
+        type="button"
+        className={`w-full text-xs p-2 text-slate-50 select-none hover:bg-neutral-900 transition-all duration-150 flex justify-between items-center ${styles}`}
         onClick={() => hasSubMenu && setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-2">
@@ -58,13 +58,13 @@ const NavigationButton = (props: NavigationButtonProps) => {
             )}
           </span>
         )}
-      </div>
+      </button>
 
       {hasSubMenu && (
         <div
           ref={subMenuRef}
-          style={{ maxHeight }}
-          className="ml-4 border-l border-neutral-700 overflow-hidden transition-[max-height] duration-100"
+          style={{ maxHeight: `${maxHeight}px` }}
+          className="ml-4 border-l border-neutral-700 overflow-hidden transition-[max-height] duration-100 ease-in-out"
         >
           {subMenu!.map((subButton, index) => (
             <NavigationButton key={index} {...subButton} />
